@@ -5,12 +5,14 @@
 ## Introduction
 
 "IT Consulting & Development" is commissioned by "OC Pizza" group for making a new management system for its pizzerias. Its current system is not satisfaying anymore.  
-After having finished and documented the functional specification "IT Consulting & Development" has to deliver the technical specificaitons.
+After having documented the functional specification, "IT Consulting & Development" is delivering the technical specificaitons.
 
 ## Deliverables
 
-* Technical documentation.
+* Technical documentation
 * DB dump
 * DB creation script
 * Data insert script
 * Use case querry script
+
+git remote add origin https://github.com/ThomasPiergiovanni/P6.git
