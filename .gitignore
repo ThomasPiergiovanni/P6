@@ -1,0 +1,12 @@
+#  venv repo
+env/
+
+# file containing pricvate settings
+configuration/env.py
+
+#  repo conatining various uneliverable files
+99_other/
+
+#  pychache repos
+__pycache__/
+
