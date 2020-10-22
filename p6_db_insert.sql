@@ -73,13 +73,39 @@ VALUES
 ("000000000002", 3, 1, 2, 4),
 ("000000000003", 4, 2, 5, 5);
 
+
 INSERT INTO p6_db.product
-(name,price,category_id)
+(name,category_id)
 VALUES
-("Margherita", 11.50, 1),
-("Regina", 13.00, 1),
-("Coca-Cola", 2, 2),
-("Tiramisù", 3.50, 3);
+("Margherita", 1),
+("Regina", 1),
+("Coca-Cola", 2),
+("Tiramisù", 3);
+
+INSERT INTO p6_db.price
+(start_validity_date,end_validity_date,price)
+VALUES
+("2019-01-01","2019-12-31", 10.50),
+("2020-01-01","2020-12-31", 11.50),
+("2019-01-01","2019-12-31", 12),
+("2020-01-01","2020-12-31", 13),
+("2019-01-01","2019-12-31", 1.50),
+("2020-01-01","2020-12-31", 2),
+("2019-01-01","2019-12-31", 3),
+("2020-01-01","2020-12-31", 3.50);
+
+INSERT INTO p6_db.productprice
+(product_id,price_id)
+VALUES
+(1, 1),
+(1, 2),
+(2, 3),
+(2, 4),
+(3, 5),
+(3, 6),
+(4, 7),
+(4, 8);
+
 
 INSERT INTO p6_db.orderline
 (order_id,product_id,quantity)

@@ -129,7 +129,6 @@ DROP TABLE IF EXISTS p6_db.product ;
 CREATE TABLE IF NOT EXISTS p6_db.product (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(128) NOT NULL,
-  price DECIMAL(5,2) NOT NULL,
   category_id INT NOT NULL,
   PRIMARY KEY (id),
   INDEX fk_product_category1_idx (category_id ASC) ,
@@ -137,6 +136,29 @@ CREATE TABLE IF NOT EXISTS p6_db.product (
   CONSTRAINT fk_product_category1
     FOREIGN KEY (category_id)
     REFERENCES p6_db.category (id))
+ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS p6_db.price ;
+CREATE TABLE IF NOT EXISTS p6_db.price (
+  id INT NOT NULL AUTO_INCREMENT,
+  start_validity_date DATE NOT NULL,
+  end_validity_date DATE NOT NULL,
+  price DECIMAL(5,2) NOT NULL,
+  PRIMARY KEY (id))
+ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS p6_db.productprice ;
+CREATE TABLE IF NOT EXISTS p6_db.productprice (
+  product_id INT NOT NULL,
+  price_id INT NOT NULL,
+  PRIMARY KEY (product_id, price_id),
+  INDEX fk_productprice_product1_idx (product_id ASC),
+  CONSTRAINT fk_productprice_product1_idx
+    FOREIGN KEY (product_id)
+    REFERENCES p6_db.product (id),
+  CONSTRAINT fk_productprice_price1_idx
+    FOREIGN KEY (price_id)
+    REFERENCES p6_db.price (id))
 ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS p6_db.receipt ;

@@ -162,6 +162,32 @@ INSERT INTO `orderline` VALUES (1,1,1),(1,3,1),(2,1,2),(2,2,1),(2,3,3),(2,4,3);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `price`
+--
+
+DROP TABLE IF EXISTS `price`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `price` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `start_validity_date` date NOT NULL,
+  `end_validity_date` date NOT NULL,
+  `price` decimal(5,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `price`
+--
+
+LOCK TABLES `price` WRITE;
+/*!40000 ALTER TABLE `price` DISABLE KEYS */;
+INSERT INTO `price` VALUES (1,'2019-01-01','2019-12-31',10.50),(2,'2020-01-01','2020-12-31',11.50),(3,'2019-01-01','2019-12-31',12.00),(4,'2020-01-01','2020-12-31',13.00),(5,'2019-01-01','2019-12-31',1.50),(6,'2020-01-01','2020-12-31',2.00),(7,'2019-01-01','2019-12-31',3.00),(8,'2020-01-01','2020-12-31',3.50);
+/*!40000 ALTER TABLE `price` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product`
 --
 
@@ -171,7 +197,6 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
-  `price` decimal(5,2) NOT NULL,
   `category_id` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`),
@@ -186,8 +211,36 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (1,'Margherita',11.50,1),(2,'Regina',13.00,1),(3,'Coca-Cola',2.00,2),(4,'Tiramisù',3.50,3);
+INSERT INTO `product` VALUES (1,'Margherita',1),(2,'Regina',1),(3,'Coca-Cola',2),(4,'Tiramisù',3);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productprice`
+--
+
+DROP TABLE IF EXISTS `productprice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productprice` (
+  `product_id` int NOT NULL,
+  `price_id` int NOT NULL,
+  PRIMARY KEY (`product_id`,`price_id`),
+  KEY `fk_productprice_product1_idx` (`product_id`),
+  KEY `fk_productprice_price1_idx` (`price_id`),
+  CONSTRAINT `fk_productprice_price1_idx` FOREIGN KEY (`price_id`) REFERENCES `price` (`id`),
+  CONSTRAINT `fk_productprice_product1_idx` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productprice`
+--
+
+LOCK TABLES `productprice` WRITE;
+/*!40000 ALTER TABLE `productprice` DISABLE KEYS */;
+INSERT INTO `productprice` VALUES (1,1),(1,2),(2,3),(2,4),(3,5),(3,6),(4,7),(4,8);
+/*!40000 ALTER TABLE `productprice` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -394,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-12 14:53:55
+-- Dump completed on 2020-10-15 13:24:33
